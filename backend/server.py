@@ -85,7 +85,7 @@ def query_virustotal(file_hash): #
     headers = {"x-apikey": VT_API_KEY}
     
     try:
-        response = requests.get(url, headers=headers)
+        response = requests.get(url, headers=headers, timeout=15)
         if response.status_code == 200:
             data = response.json()
             stats = data['data']['attributes']['last_analysis_stats']
@@ -208,7 +208,7 @@ async def scan_malware(file: UploadFile = File(...)): #
         """
 
         url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}" #
-        response = requests.post(url, headers={'Content-Type': 'application/json'}, json={"contents": [{"parts": [{"text": prompt}]}]}) #
+        response = requests.post(url, headers={'Content-Type': 'application/json'}, json={"contents": [{"parts": [{"text": prompt}]}]}, timeout=30) #
         response_data = response.json() #
         
         if "error" in response_data: #
