@@ -1,0 +1,5 @@
+fastapi
+uvicorn
+pefile
+requests
+python-multipart

@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+.env
+backend/.env
+
+# 로컬 개발/테스트용 원본 파일 (하드코딩된 키 포함 - 저장소에는 올리지 않음)
+/server.py
+/hashes.txt
+/index (2).html
+/script.js
+/style.css
+/bg-bloom.png
+/untitled.ows2321.ows
