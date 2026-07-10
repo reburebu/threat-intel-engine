@@ -12,9 +12,9 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
+    allow_origins=["https://threatintelengine.netlify.app"],
+    allow_credentials=False,
+    allow_methods=["POST"],
     allow_headers=["*"],
 )
 
