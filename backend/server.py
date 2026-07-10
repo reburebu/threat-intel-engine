@@ -144,12 +144,18 @@ async def verify_integrity(file_orig: UploadFile = File(...), file_target: Uploa
 
 
 # 🌳 [상위 기능 2]: 1개 파일을 검사하며 하위 기능(로컬 DB, VT, AI)을 처리하는 기존 라우터 구조 보존
+MAX_SCAN_FILE_SIZE = 20 * 1024 * 1024
+
 @app.post("/scan")
 async def scan_malware(file: UploadFile = File(...)): #
     try:
         file_bytes = await file.read() #
+
+        if len(file_bytes) > MAX_SCAN_FILE_SIZE:
+            return {"error": f"파일이 너무 큽니다 ({len(file_bytes) // (1024*1024)}MB). 최대 {MAX_SCAN_FILE_SIZE // (1024*1024)}MB까지 스캔 가능합니다."}
+
         file_hash = hashlib.sha256(file_bytes).hexdigest().lower()
-        
+
         is_matched_local = file_hash in MALWARE_HASHES #
         ioc_data = extract_ioc_strings(file_bytes) #
         pe_info = extract_pe_info_for_ai(file_bytes) #

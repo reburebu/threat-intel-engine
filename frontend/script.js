@@ -207,6 +207,13 @@ function initScanButton() {
 
             const result = await response.json();
 
+            // 백엔드가 명시적으로 반환한 에러(예: 파일 용량 초과)는 정상 결과처럼 그리지 않고 바로 안내
+            if (result.error) {
+                alert(result.error);
+                switchMode(currentMode);
+                return;
+            }
+
             // 전송 완료 시 렌더링 파이프라인 호출
             renderAnalysisResults(result);
 
