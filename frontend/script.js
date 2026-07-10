@@ -3,8 +3,7 @@
  * - 탭 전환, 파일 드래그 앤 드롭 인터랙션, 백엔드 API 통신 연동
  */
 
-// 배포된 Render 백엔드 URL로 교체하세요 (예: https://your-app.onrender.com)
-const API_BASE = "https://YOUR-RENDER-APP.onrender.com";
+const API_BASE = "https://threat-intel-engine.onrender.com";
 
 // 1. 전역 상태 관리 변수
 let currentMode = 'integrity'; // 'integrity' 또는 'malware'
