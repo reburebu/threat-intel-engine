@@ -229,12 +229,16 @@ function renderAnalysisResults(data) {
     const malHeader = document.getElementById('malwareHeaderBlock');
     const integrityHeader = document.getElementById('integrityHeaderBlock');
     const integrityCard = document.getElementById('integrityDetailCard');
+    const malwareCard = document.getElementById('malwareDetailCard');
+    const iocCard = document.getElementById('iocDetailCard');
 
     // 2) 모드 플래그별 헤더 블록 가시성 설정
     if (currentMode === 'integrity') {
         malHeader.classList.add('hidden');
         integrityHeader.classList.remove('hidden');
         integrityCard.style.display = "block"; // 무결성 해시 매트릭스 노출
+        malwareCard.style.display = "none"; // 이전 AI 스캔 결과(진행률/VT 점수) 잔상 제거
+        iocCard.style.display = "none"; // 이전 IOC 목록 잔상 제거
 
         // 💡 [무결성 해시 매핑 복구] 무결성 검증 탭 리턴 데이터(orig_hash, target_hash) 정상 바인딩
         const hash1 = data.orig_hash || "-";
@@ -263,6 +267,8 @@ function renderAnalysisResults(data) {
         malHeader.classList.remove('hidden');
         integrityHeader.classList.add('hidden');
         integrityCard.style.display = "none";
+        malwareCard.style.display = "flex";
+        iocCard.style.display = "flex";
 
         // AI 스캔 해시 매핑
         const singleHash = data.integrity_check?.file_hash || "-";
